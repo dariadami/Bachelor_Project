@@ -18,7 +18,8 @@ RECIPE=${RECIPE:-environment.yml}
 ENV_NAME="${ENV_NAME:-netd}"
 echo "Creating conda environment ${ENV_NAME}"
 
-if [[ ! $(type -P conda) ]]
+#if [[ ! $(type -P conda) ]]
+if [[ ! $(type -P conda.exe) ]]
 then
     echo "conda not in PATH"
     echo "read: https://conda.io/docs/user-guide/install/index.html"
@@ -47,6 +48,7 @@ fi
 
 # Uninstall existing environment
 if [[ -e "${HOME}/.conda/envs/${ENV_NAME}" ]]
+#if [[ -e "${HOME}/anaconda3/envs/${ENV_NAME}" ]]
 then
  if [[ "$1" == "rebuild" ]]
  then
@@ -57,11 +59,15 @@ then
   exit 1
  fi
 fi
-source deactivate
+#source deactivate
+conda.exe deactivate
 rm -rf ~/.conda/envs/${ENV_NAME}
+#rm -rf ~/anaconda3/envs/${ENV_NAME}
 
 # Build new environment: torch and torch vision from source
-conda env create --name=${ENV_NAME} -f script/${RECIPE}
+#conda env create --name=${ENV_NAME} -f script/${RECIPE}
+conda.exe env create --name=${ENV_NAME} -f script/${RECIPE}
+#conda create -n ${ENV_NAME} --file script/${RECIPE}
 
 # Set up CUDA_HOME to set itself up correctly on every source activate
 # https://stackoverflow.com/questions/31598963
@@ -71,4 +77,5 @@ mkdir -p ~/.conda/envs/${ENV_NAME}/etc/conda/activate.d
 echo "export CUDA_HOME=/usr/local/cuda-9.0" > \
     ~/.conda/envs/${ENV_NAME}/etc/conda/activate.d/CUDA_HOME.sh
 
-source activate ${ENV_NAME}
+#source activate ${ENV_NAME}
+conda.exe activate ${ENV_NAME}
