@@ -19,12 +19,12 @@ ENV_NAME="${ENV_NAME:-netd}"
 echo "Creating conda environment ${ENV_NAME}"
 
 #if [[ ! $(type -P conda) ]]
-if [[ ! $(type -P conda.exe) ]]
-then
-    echo "conda not in PATH"
-    echo "read: https://conda.io/docs/user-guide/install/index.html"
-    exit 1
-fi
+#if [[ ! $(type -P conda.exe) ]]
+#then
+#    echo "conda not in PATH"
+#    echo "read: https://conda.io/docs/user-guide/install/index.html"
+#    exit 1
+#fi
 
 # If within the torralba lab NFS environment, set up dotconda directory.
 if [[ ! -e ${HOME}/.conda &&
@@ -60,14 +60,15 @@ then
  fi
 fi
 #source deactivate
-conda.exe deactivate
+#conda.exe deactivate
 rm -rf ~/.conda/envs/${ENV_NAME}
 #rm -rf ~/anaconda3/envs/${ENV_NAME}
 
 # Build new environment: torch and torch vision from source
 #conda env create --name=${ENV_NAME} -f script/${RECIPE}
-conda.exe env create --name=${ENV_NAME} -f script/${RECIPE}
-#conda create -n ${ENV_NAME} --file script/${RECIPE}
+
+#conda.exe env create --name=${ENV_NAME} -f script/${RECIPE}
+conda create -n ${ENV_NAME} --file script/${RECIPE}
 
 # Set up CUDA_HOME to set itself up correctly on every source activate
 # https://stackoverflow.com/questions/31598963

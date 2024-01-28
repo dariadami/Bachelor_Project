@@ -33,7 +33,7 @@ setuptools.setup(
         "numpy>=1.14.5",
         "Pillow>=4.1.0",
         "scipy>=1.1.0",
-        "scikit-image>=0.14.0"
+        "scikit-image>=0.14.0",
         "tqdm>=4.23.4",
     ],
 )
