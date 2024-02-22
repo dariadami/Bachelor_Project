@@ -10,13 +10,15 @@ FROM pytorch/pytorch:2.2.0-cuda12.1-cudnn8-devel
 #Install
 RUN pip3 install matplotlib
 
-RUN pip3 install scikit-image
+RUN pip3 install scikit-image==0.19.3
 
-RUN pip3 install scipy
+RUN pip3 install scipy==1.11
 
 RUN pip3 install IPython
 
 RUN pip3 install Ninja
+
+RUN pip3 install numpy==1.21.6
 
 #Create a working directory.
 RUN mkdir /app

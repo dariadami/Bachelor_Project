@@ -79,7 +79,7 @@ def main():
                         help='dataset subset size to use')
     parser.add_argument('--batch_size', type=int, default=100,
                         help='batch size for forward pass')
-    parser.add_argument('--num_workers', type=int, default=24,
+    parser.add_argument('--num_workers', type=int, default=12,
                         help='number of DataLoader workers')
     parser.add_argument('--quantile_threshold', type=strfloat, default=None,
                         choices=[FloatRange(0.0, 1.0), 'iqr'],
